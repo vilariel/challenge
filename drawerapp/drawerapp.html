@@ -5,7 +5,6 @@
 <body>
   <div class="container">
     <h1>Draw Star</h1>
-    {{> actions}}
     <div id="turtleView"></div>
   </div>
   <script>
@@ -15,11 +14,3 @@
     var stage = new PIXI.Container();
   </script>
 </body>
-
-<template name="actions">
-  <form class="draw">
-    <input type="text" id="edges" name="edges" placeholder="Edges"/>
-    <input type="text" id="radius" name="radius" placeholder="Radius"/>
-    <input type="submit" value="Draw Star"/>
-  </form>
-</template>

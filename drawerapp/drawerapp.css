@@ -23,13 +23,6 @@ body {
   background: white;
 }
 
-.container {
-  max-width: 600px;
-  margin: 0 auto;
-  min-height: 100%;
-  background: white;
-}
-
 #turtleView {
   padding-top: 30px;
   padding-left: 50px;
@@ -52,22 +45,4 @@ h1 {
   margin-bottom: 10px;
   display: inline-block;
   margin-right: 1em;
-}
-
-form {
-  margin-top: 10px;
-  margin-bottom: -10px;
-  position: relative;
-}
-
-.draw input {
-  margin-left: 20px;
-}
-
-#edges, #radius {
-  max-width: 100px;
-}
-
-#edges {
-  margin-left: 50px;
 }

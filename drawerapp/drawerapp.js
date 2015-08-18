@@ -6,15 +6,6 @@ if (Meteor.isClient) {
   positionStream.on('update', function(oldx, oldy, newx, newy) {
     drawPixi(oldx, oldy, newx, newy);
   });
-  
-  Template.actions.events({
-    "submit .draw": function (event) {
-      event.preventDefault();
-      var edges = event.target.edges.value;
-      var radius = event.target.radius.value;
-      Meteor.call("moveTurtle", edges, radius);
-    }
-  });
 }
 
 if (Meteor.isServer) {
@@ -39,24 +30,10 @@ if (Meteor.isServer) {
   ros.on('close', function() {
     console.log('Connection to websocket server closed.');
   });
-  
-  
 
   Meteor.methods({
     logToConsole: function(msg) {
       console.log(msg);
-    },
-    moveTurtle: function(edges, radius) {
-      console.log('Asked to draw: (' + edges + ' - ' + radius + ')');
-      var cmdDraw = new ROSLIB.Topic({
-        ros : ros,
-        name : '/draw',
-        messageType : 'std_msgs/String'
-      });
-      var starMsg = new ROSLIB.Message({
-        data : edges + ' ' + radius
-      });
-      cmdDraw.publish(starMsg);
     }
   });
     

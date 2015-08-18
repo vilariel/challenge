@@ -8,79 +8,73 @@ The ROS node and the meteor server should work on an Ubuntu 14.04 box.
 
 ## Prerequisites
 
-Have ROS (Jade) base package installed
-```
-http://wiki.ros.org/ROS/Installation
-```
+* Have [ROS (Jade) base package](http://wiki.ros.org/ROS/Installation) installed
 
-Have Meteor installed
-```
-https://www.meteor.com/install
-```
+* Have [Meteor](https://www.meteor.com/install) installed
 
-Have Npm installed
+* Have Npm installed
 ```sh
-sudo apt-get install npm
+$ sudo apt-get install npm
 ```
 
-Have Git installed
+* Have Git installed
 ```sh
-sudo apt-get install git
+$ sudo apt-get install git
 ```
 
-Have additional ROS packages installed: angles, turtlesim, rosbridge-server
+* Have additional ROS packages installed: angles, turtlesim, rosbridge-server
 ```sh
-sudo apt-get install ros-jade-angles
-sudo apt-get install ros-jade-turtlesim
-sudo apt-get install ros-jade-rosbridge-server
+$ sudo apt-get install ros-jade-angles
+$ sudo apt-get install ros-jade-turtlesim
+$ sudo apt-get install ros-jade-rosbridge-server
 ```
 
 ## Installation
 
 ```sh
-git clone https://github.com/vilariel/challenge <yourpackagefolder>
+$ git clone https://github.com/vilariel/challenge <yourpackagefolder>
 ```
 
 Finish Drawer App installation
 ```sh
-cd <yourpackagefolder>
-aux/install_drawer_app.sh
+$ cd <yourpackagefolder>
+$ aux/install_drawer_app.sh
 ```
 
 Compile Drawer Node
 ```sh
-cd <yourpackagefolder>/drawernode
-catkin_make
+$ cd <yourpackagefolder>/drawernode
+$ catkin_make
 ```
 
 ## Tests
 
 Start ROS core process
 ```sh
-roscore
+$ roscore
 ```
 
 Launch the rosbridge v2.0 server (from a new terminal)
 ```sh
-roslaunch rosbridge_server rosbridge_websocket.launch
+$ roslaunch rosbridge_server rosbridge_websocket.launch
 ```
 
 Launch the turtlesim (from a new terminal)
 ```sh
-rosrun turtlesim turtlesim_node
+$ rosrun turtlesim turtlesim_node
 ```
 
 Launch the Drawer Node (from a new terminal)
 ```sh
-cd <yourpackagefolder>/drawernode
-source devel/setup.bash
-rosrun turtle_star star_drawer
+$ cd <yourpackagefolder>/drawernode
+$ source devel/setup.bash
+$ rosrun turtle_star star_drawer
 ```
 
 Launch the Drawer App (from a new terminal)
 ```sh
-cd <yourpackagefolder>/drawerapp
-meteor
+$ cd <yourpackagefolder>/drawerapp
+$ meteor
 ```
 
 Open Drawer App in browser
@@ -90,12 +84,12 @@ http://localhost:3000
 
 Draw Star (from a new terminal)
 ```sh
-rostopic pub -1 /draw std_msgs/String '9 2'
+$ rostopic pub -1 /draw std_msgs/String '9 2'
 ```
 
-Draw Node is suscribed to /draw Topics which are of type std_msgs/String, consisting of two numbers: ‘<edges> <radius>’
-- <edges> corresponds to the number of points of the star to be drawn. This number must be an odd integer so the star can be drawn with a single stroke.
-- <radius> corresponds to the radius of the star to be drawn. This number should be 2.5 or smaller so the star fits the window at its starting point.
+Draw Node is suscribed to /draw Topics which are of type std_msgs/String, consisting of two numbers: ‘edges radius’
+- edges: corresponds to the number of points of the star to be drawn. This number must be an odd integer so the star can be drawn with a single stroke.
+- radius: corresponds to the radius of the star to be drawn. This number should be 2.5 or smaller so the star fits the window at its starting point.
 
 ## API Reference
 

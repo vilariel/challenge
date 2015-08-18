@@ -8,6 +8,8 @@ The ROS node and the meteor server should work on an Ubuntu 14.04 box.
 
 ## Prerequisites
 
+* Ubuntu 14.04 box
+
 * Have [ROS (Jade) base package](http://wiki.ros.org/ROS/Installation) installed
 
 * Have [Meteor](https://www.meteor.com/install) installed
@@ -54,7 +56,7 @@ Start ROS core process
 $ roscore
 ```
 
-Launch the rosbridge v2.0 server (from a new terminal)
+Launch the rosbridge server (from a new terminal)
 ```sh
 $ roslaunch rosbridge_server rosbridge_websocket.launch
 ```
@@ -90,6 +92,12 @@ $ rostopic pub -1 /draw std_msgs/String '9 2'
 Draw Node is suscribed to /draw Topics which are of type std_msgs/String, consisting of two numbers: ‘edges radius’
 - edges: corresponds to the number of points of the star to be drawn. This number must be an odd integer so the star can be drawn with a single stroke.
 - radius: corresponds to the radius of the star to be drawn. This number should be 2.5 or smaller so the star fits the window at its starting point.
+
+## Expected Result
+
+Every browser pointing to http://localhost:3000 should display the same drawing made by the turtle in real time.
+
+![screenshot](https://raw.github.com/vilariel/challenge/blob/master/aux/screenshot.png)
 
 ## API Reference
 

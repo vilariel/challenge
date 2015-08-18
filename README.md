@@ -97,7 +97,7 @@ Draw Node is suscribed to /draw Topics which are of type std_msgs/String, consis
 
 Every browser pointing to [http://localhost:3000](http://localhost:3000) should display the same drawing made by the turtle in real time.
 
-![screenshot](/vilariel/challenge/blob/master/aux/screenshot.png?raw=true)
+![screenshot](https://raw.githubusercontent.com/vilariel/challenge/master/aux/screenshot.png)
 
 ## API Reference
 

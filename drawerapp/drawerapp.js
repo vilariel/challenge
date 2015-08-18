@@ -8,8 +8,11 @@ if (Meteor.isClient) {
   });
   
   Template.actions.events({
-    'click .turtle': function () {
-      Meteor.call("moveTurtle");
+    "submit .draw": function (event) {
+      event.preventDefault();
+      var edges = event.target.edges.value;
+      var radius = event.target.radius.value;
+      Meteor.call("moveTurtle", edges, radius);
     }
   });
 }
@@ -43,25 +46,17 @@ if (Meteor.isServer) {
     logToConsole: function(msg) {
       console.log(msg);
     },
-    moveTurtle: function() {
-      var cmdVel = new ROSLIB.Topic({
+    moveTurtle: function(edges, radius) {
+      console.log('Asked to draw: (' + edges + ' - ' + radius + ')');
+      var cmdDraw = new ROSLIB.Topic({
         ros : ros,
-        name : '/turtle1/cmd_vel',
-        messageType : 'geometry_msgs/Twist'
+        name : '/draw',
+        messageType : 'std_msgs/String'
       });
-      var twist = new ROSLIB.Message({
-        linear : {
-          x : 3.0,
-          y : 0.0,
-          z : 0.0
-        },
-        angular : {
-          x : 0.0,
-          y : 0.0,
-          z : 1.5
-        }
+      var starMsg = new ROSLIB.Message({
+        data : edges + ' ' + radius
       });
-      cmdVel.publish(twist);
+      cmdDraw.publish(starMsg);
     }
   });
     
@@ -74,15 +69,14 @@ if (Meteor.isServer) {
   });
 
   listener.subscribe(function(message) {
-    //console.log('Received message on ' + listener.name + ': (' + message.x + ', ' + message.y + ')');
     newx = message.x;
     newy = message.y;
     if (oldx == -1) {
-      console.log('First movement - Initial position');
       oldx = newx;
       oldy = newy;
-    } else if (oldx != newx && oldy != newy) {
-      console.log('Oldx = ' + oldx + ', oldy = ' + oldy + ', newx = ' + newx + ', newy = ' + newy);
+      console.log('First movement - Initial position: (' + oldx + ', ' + oldy + ')');
+    } else if (oldx != newx || oldy != newy) {
+      //console.log('Draw: oldx = ' + oldx + ', oldy = ' + oldy + ', newx = ' + newx + ', newy = ' + newy);
       Fiber(function() {
         positionStream.emit('update', oldx, oldy, newx, newy);
         oldx = newx;

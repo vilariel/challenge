@@ -22,18 +22,13 @@ catkin_package()
 ## Set include dirs
 include_directories(${catkin_INCLUDE_DIRS})
 
-## shape_server executable
-add_executable(star_server src/star_server.cpp)
-target_link_libraries(star_server ${catkin_LIBRARIES})
-add_dependencies(star_server ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-
-## shape_client executable
-add_executable(star_client src/star_client.cpp)
-target_link_libraries(star_client ${catkin_LIBRARIES})
-add_dependencies(star_client ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+## star_drawer executable
+add_executable(star_drawer src/star_drawer.cpp)
+target_link_libraries(star_drawer ${catkin_LIBRARIES})
+add_dependencies(star_drawer ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Mark executables for installation
-install(TARGETS star_server star_client
+install(TARGETS star_drawer
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
